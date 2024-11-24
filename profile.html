@@ -1,104 +1,225 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Profile</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Profile Management</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
-</head>
-<body class="bg-gray-100">
+    <style>
+      body {
+        font-family: "Poppins", sans-serif;
+      }
+    </style>
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/qrious/dist/qrious.min.js"></script>
+  </head>
+  <body class="bg-gray-100">
     <div class="max-w-md mx-auto bg-white min-h-screen flex flex-col">
-        <!-- Header -->
-        <header class="bg-blue-600 text-white p-4 flex items-center justify-between">
-            <button class="text-white" aria-label="Go back">
-                <i class="fas fa-arrow-left"></i>
-            </button>
-            <h1 class="text-xl font-bold">Profile Management</h1>
-            <button class="text-white" aria-label="Save profile">
-                <i class="fas fa-save"></i>
-            </button>
-        </header>
+      <!-- Header -->
+      <header
+        class="bg-indigo-600 text-white p-4 flex items-center justify-between"
+      >
+      <a href="home.html">
+        <button class="text-white" aria-label="Go back">
+          <i class="fas fa-arrow-left"></i>
+        </button></a>
+        <h1 class="text-xl font-semibold">Profile Management</h1>
+        <button class="text-white" aria-label="Save profile" ">
+            <i class="fas fa-save"></i>
+        </button>
+      </header>
 
-        <!-- Main Content -->
-        <main class="flex-grow p-4 space-y-6 overflow-y-auto">
-            <!-- Profile Picture -->
-            <section class="flex flex-col items-center">
-                <div class="w-32 h-32 bg-gray-300 rounded-full overflow-hidden">
-                    <img src="/placeholder.svg?height=128&width=128" alt="Profile picture" class="w-full h-full object-cover">
-                </div>
-                <button class="mt-2 text-blue-600">
-                    <i class="fas fa-camera mr-2"></i>Change Photo
-                </button>
-            </section>
-
-            <!-- Profile Form -->
-            <form class="space-y-4">
-                <div>
-                    <label for="fullName" class="block text-sm font-medium text-gray-700">Full Name</label>
-                    <input type="text" id="fullName" name="fullName" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50">
-                </div>
-                <div>
-                    <label for="dateOfBirth" class="block text-sm font-medium text-gray-700">Date of Birth</label>
-                    <input type="date" id="dateOfBirth" name="dateOfBirth" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50">
-                </div>
-                <div>
-                    <label for="bloodType" class="block text-sm font-medium text-gray-700">Blood Type</label>
-                    <select id="bloodType" name="bloodType" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50">
-                        <option>A+</option>
-                        <option>A-</option>
-                        <option>B+</option>
-                        <option>B-</option>
-                        <option>AB+</option>
-                        <option>AB-</option>
-                        <option>O+</option>
-                        <option>O-</option>
-                    </select>
-                </div>
-                <div>
-                    <label for="allergies" class="block text-sm font-medium text-gray-700">Allergies</label>
-                    <textarea id="allergies" name="allergies" rows="3" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"></textarea>
-                </div>
-                <div>
-                    <label for="emergencyContact" class="block text-sm font-medium text-gray-700">Emergency Contact</label>
-                    <input type="tel" id="emergencyContact" name="emergencyContact" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50">
-                </div>
-            </form>
-
-            <!-- Generate QR Code Button -->
-            <div class="flex justify-center">
-                <button class="bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">
-                    <i class="fas fa-qrcode mr-2"></i>Generate QR Code
-                </button>
+      <!-- Main Content -->
+      <main class="flex-grow p-4 space-y-6 overflow-y-auto">
+        <!-- Profile Picture -->
+        <section class="flex flex-col items-center">
+            <div class="w-32 h-32 bg-gray-300 rounded-full overflow-hidden">
+              <!-- Image element to display the uploaded picture -->
+              <img
+                id="profilePicture"
+                src="/placeholder.svg?height=128&width=128"
+                alt="Profile picture"
+                class="w-full h-full object-cover"
+              />
             </div>
+            <!-- File input for uploading profile picture -->
+            <label
+              for="profilePictureInput"
+              class="mt-2 text-indigo-600 cursor-pointer flex items-center"
+            >
+              <i class="fas fa-camera mr-2"></i>Change Photo
+            </label>
+            <input
+              type="file"
+              id="profilePictureInput"
+              accept="image/*"
+              class="hidden"
+            />
+          </section>
+          
 
-            <!-- QR Code Display (Initially Hidden) -->
-            <div class="hidden flex flex-col items-center" id="qrCodeSection">
-                <h2 class="text-lg font-semibold mb-2">Your QR Code</h2>
-                <div class="w-48 h-48 bg-gray-200 flex items-center justify-center">
-                    <i class="fas fa-qrcode text-6xl text-gray-400"></i>
-                </div>
-                <p class="mt-2 text-sm text-gray-600">Scan this code to view your profile information</p>
-            </div>
-        </main>
+        <!-- Profile Form -->
+        <form id="profileForm" class="space-y-4">
+          <div>
+            <label
+              for="fullName"
+              class="block text-sm font-medium text-gray-700"
+              >Full Name</label
+            >
+            <input
+              type="text"
+              id="fullName"
+              name="fullName"
+              class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
+            />
+          </div>
+          <div>
+            <label
+              for="dateOfBirth"
+              class="block text-sm font-medium text-gray-700"
+              >Date of Birth</label
+            >
+            <input
+              type="date"
+              id="dateOfBirth"
+              name="dateOfBirth"
+              class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
+            />
+          </div>
+          <div>
+            <label
+              for="bloodType"
+              class="block text-sm font-medium text-gray-700"
+              >Blood Type</label
+            >
+            <select
+              id="bloodType"
+              name="bloodType"
+              class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
+            >
+              <option>A+</option>
+              <option>A-</option>
+              <option>B+</option>
+              <option>B-</option>
+              <option>AB+</option>
+              <option>AB-</option>
+              <option>O+</option>
+              <option>O-</option>
+            </select>
+          </div>
+          <div>
+            <label
+              for="allergies"
+              class="block text-sm font-medium text-gray-700"
+              >Allergies</label
+            >
+            <textarea
+              id="allergies"
+              name="allergies"
+              rows="3"
+              class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
+            ></textarea>
+          </div>
+          <div>
+            <label
+              for="emergencyContact"
+              class="block text-sm font-medium text-gray-700"
+              >Emergency Contact</label
+            >
+            <input
+              type="tel"
+              id="emergencyContact"
+              name="emergencyContact"
+              class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
+            />
+          </div>
+        </form>
+        <!-- QR Code Display -->
+        <div class="flex flex-col items-center mt-4 hidden" id="qrCodeSection">
+          <h2 class="text-lg font-semibold mb-2">Your QR Code</h2>
+          <canvas id="qrCodeCanvas" class="w-48 h-48"></canvas>
+          <p class="mt-2 text-sm text-gray-600">
+            Scan this code to view your profile information
+          </p>
+        </div>
+        <!-- Generate QR Code Button -->
+        <div class="flex justify-center mb-50 pb-6">
+          <button
+            id="generateQR"
+            class="bg-indigo-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
+          >
+            <i class="fas fa-qrcode mr-2"></i>Generate QR Code
+          </button>
+        </div>
 
-        <!-- Footer Navigation -->
-        <footer class="bg-white border-t border-gray-200 p-4">
-            <nav class="flex justify-around">
-                <a href="#" class="text-gray-600"><i class="fas fa-home"></i></a>
-                <a href="#" class="text-gray-600"><i class="fas fa-pills"></i></a>
-                <a href="#" class="text-gray-600"><i class="fas fa-chart-line"></i></a>
-                <a href="#" class="text-blue-600"><i class="fas fa-user-md"></i></a>
-            </nav>
-        </footer>
+        <div></div>
+      </main>
+
+      <!-- Footer Navigation -->
+      <footer
+        class="bg-white border-t border-gray-200 p-4 fixed bottom-0 left-0 w-full"
+      >
+        <nav class="flex justify-around">
+          <a href="home.html" class="text-gray-600"><i class="fas fa-home"></i></a>
+          <a href="medication-tracking.html" class="text-gray-600"><i class="fas fa-pills"></i></a>
+          <a href="symptoms.html" class="text-gray-600"
+            ><i class="fas fa-chart-line"></i
+          ></a>
+          <a href="profile.html" class="text-indigo-600"><i class="fas fa-user-md"></i></a>
+        </nav>
+      </footer>
     </div>
 
     <script>
-        // This script is for demonstration purposes only
-        // In a real app, you would generate the QR code on the server or use a QR code library
-        document.querySelector('button:contains("Generate QR Code")').addEventListener('click', function() {
-            document.getElementById('qrCodeSection').classList.remove('hidden');
+      document
+        .getElementById("generateQR")
+        .addEventListener("click", function () {
+          const qrSection = document.getElementById("qrCodeSection");
+          const qrCanvas = document.getElementById("qrCodeCanvas");
+
+          const fullName = document.getElementById("fullName").value;
+          const dateOfBirth = document.getElementById("dateOfBirth").value;
+          const bloodType = document.getElementById("bloodType").value;
+          const allergies = document.getElementById("allergies").value;
+          const emergencyContact =
+            document.getElementById("emergencyContact").value;
+
+          const profileData = {
+            fullName,
+            dateOfBirth,
+            bloodType,
+            allergies,
+            emergencyContact,
+          };
+
+          const qr = new QRious({
+            element: qrCanvas,
+            value: JSON.stringify(profileData),
+            size: 200,
+          });
+
+          qrSection.classList.remove("hidden");
         });
+
+        document
+  .getElementById("profilePictureInput")
+  .addEventListener("change", function (event) {
+    const file = event.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+
+      reader.onload = function (e) {
+        const profilePicture = document.getElementById("profilePicture");
+        profilePicture.src = e.target.result;
+      };
+
+      reader.readAsDataURL(file);
+    }
+  });
+
     </script>
-</body>
+  </body>
 </html>

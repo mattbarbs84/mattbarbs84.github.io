@@ -25,9 +25,10 @@
       <header
         class="bg-indigo-600 text-white p-4 flex items-center justify-between"
       >
+      <a href="home.html">
         <button class="text-white" aria-label="Go back">
           <i class="fas fa-arrow-left"></i>
-        </button>
+        </button></a>
         <h1 class="text-xl font-bold">Symptoms Tracking</h1>
         <div></div>
       </header>
@@ -90,14 +91,6 @@
         <section>
           <h2 class="text-lg font-semibold mb-2">Symptom Logs</h2>
           <div class="bg-white rounded-lg shadow p-4 space-y-4">
-            <div class="border-l-4 border-blue-500 pl-4">
-              <div class="flex justify-between items-center">
-                <span class="font-semibold">Headache</span>
-                <span class="text-sm text-gray-600">Today, 2:30 PM</span>
-              </div>
-              <p class="text-sm text-gray-600">Severity: 6/10</p>
-              <p class="text-sm">Throbbing pain on the left side</p>
-            </div>
             <div class="border-l-4 border-yellow-500 pl-4">
               <div class="flex justify-between items-center">
                 <span class="font-semibold">Tummy Ache</span>
@@ -134,7 +127,7 @@
           <a href="symptoms.html" class="text-indigo-600"
             ><i class="fas fa-chart-line"></i
           ></a>
-          <a href="#" class="text-gray-600"><i class="fas fa-user-md"></i></a>
+          <a href="profile.html" class="text-gray-600"><i class="fas fa-user-md"></i></a>
         </nav>
       </footer>
     </div>
@@ -163,6 +156,7 @@
           hour12: true,
         });
 
+        
         // Assign a color based on severity
         let severityColor;
         if (severity <= 3) {
@@ -172,37 +166,39 @@
         } else {
           severityColor = "border-red-500";
         }
-
+        
         // Create a new symptom log element
         const logEntry = document.createElement("div");
         logEntry.className = `border-l-4 ${severityColor} pl-4 flex justify-between items-start`;
-
+        
         logEntry.innerHTML = `
-                <div>
+        <div>
                     <div class="flex justify-between items-center gap-5">
-                        <span class="font-semibold">${symptomName}</span>
-                        <span class="text-sm text-gray-600 text-end">${formattedDate}</span>
-                    </div>
-                    <p class="text-sm text-gray-600">Severity: ${severity}/10</p>
-                    <p class="text-sm">${notes}</p>
-                    <button class="text-red-500 flex hover:text-red-700 delete-btn" aria-label="Delete symptom">
+                      <span class="font-semibold">${symptomName}</span>
+                      <span class="text-sm text-gray-600 text-end">${formattedDate}</span>
+                      </div>
+                      <p class="text-sm text-gray-600">Severity: ${severity}/10</p>
+                      <p class="text-sm">${notes}</p>
+                      <button class="text-red-500 flex hover:text-red-700 delete-btn" aria-label="Delete symptom">
                         <i class="fas fa-trash"></i>
-                    </button>
-                </div>
-            `;
+                        </button>
+                        </div>
+                        `;
+                        
+                        // Add the log entry to the symptom timeline
+                        symptomTimeline.prepend(logEntry);
+                        
+                        // Attach delete functionality to the delete button
+                        const deleteButton = logEntry.querySelector(".delete-btn");
+                        deleteButton.addEventListener("click", () => {
+                          logEntry.remove();
+                        });
+                        
+                
 
-        // Add the log entry to the symptom timeline
-        symptomTimeline.prepend(logEntry);
-
-        // Attach delete functionality to the delete button
-        const deleteButton = logEntry.querySelector(".delete-btn");
-        deleteButton.addEventListener("click", () => {
-          logEntry.remove();
-        });
-
-        // Reset the form
-        form.reset();
-      });
-    </script>
+                        // Reset the form
+                        form.reset();
+                      });
+                      </script>
   </body>
 </html>

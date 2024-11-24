@@ -26,6 +26,14 @@
         class="bg-indigo-600 text-white p-4 flex items-center justify-between"
       >
         <h1 class="text-xl font-bold">Psyche</h1>
+        <button
+        onclick="handleLogout()" 
+        class="bg-indigo-900 hover:bg-red-700 text-white text-xs px-2 py-2 rounded-lg"
+      >
+        Log Out
+        <i class="fas fa-sign-out-alt"></i>
+      </button>
+      
       </header>
 
       <!-- Main Content -->
@@ -35,13 +43,12 @@
           <h2 class="text-lg font-semibold mb-2">Your QR Code</h2>
           <div class="flex justify-center">
             <div class="w-32 h-32 bg-gray-300 flex items-center justify-center">
-              <i class="fas fa-qrcode text-4xl"></i>
+              <img src="/assets/qr.JPG" alt="QR Code" class="w-full h-full object-cover">
             </div>
           </div>
         </section>
 
         <!-- Call for Hospital Attention -->
-
         <section class="flex justify-center">
           <button
             class="bg-red-500 rounded-lg shadow p-5 w-60 text-white hover:bg-red-200"
@@ -58,19 +65,33 @@
 
         <!-- Medication Tracking -->
         <section class="bg-white rounded-lg shadow p-4">
-          <h2 class="text-lg font-semibold mb-2">Medication Tracking</h2>
-          <div class="flex justify-between items-center">
-            <span>Log & set reminders</span>
-            <i class="fas fa-pills text-blue-600"></i>
+          <h2 class="text-lg font-semibold mb-2">Track your Medication</h2>
+          <div class="flex justify-center items-center">
+            <a
+              href="medication-tracking.html"
+              class="text-white  flex items-center space-x-2 mt-5"
+            >
+            <button class="bg-indigo-600 hover:bg-gray-300 p-2 rounded-lg"
+            ><i class="fas fa-pills"></i>
+              <span>Medication Tracker</span></button>
+              
+            </a>
           </div>
         </section>
 
         <!-- Symptoms Tracking -->
         <section class="bg-white rounded-lg shadow p-4">
-          <h2 class="text-lg font-semibold mb-2">Symptoms Tracking</h2>
-          <div class="flex justify-between items-center">
-            <span>Log & view timeline</span>
-            <i class="fas fa-chart-line text-blue-600"></i>
+          <h2 class="text-lg font-semibold mb-2">Track your Symptoms</h2>
+          <div class="flex justify-center items-center">
+            <a
+              href="symptoms.html"
+              class="text-white  flex items-center space-x-2 mt-5"
+            >
+            <button class="bg-indigo-600 hover:bg-gray-300 p-2 rounded-lg w-full"
+            ><i class="fas fa-chart-line"></i>
+              <span>Symptoms Tracker</span></button>
+              
+            </a>
           </div>
         </section>
       </main>
@@ -89,5 +110,14 @@
         </nav>
       </footer>
     </div>
+    <script>
+      function handleLogout() {
+    const confirmed = confirm("Are you sure you want to log out?");
+    if (confirmed) {
+      window.location.href = "login.html";
+    }
+  }
+    </script>
+    
   </body>
 </html>
