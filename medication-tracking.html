@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medication Tracking</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body{
+            font-family: 'Poppins', sans-serif;
+        }
+    </style>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100">
+    <div class="max-w-md mx-auto bg-white min-h-screen flex flex-col">
+        <!-- Header -->
+        <header class="bg-indigo-600 text-white p-4 flex items-center justify-between">
+            <a href="home.html">
+            <button class="text-white" aria-label="Go back" >
+                <i class="fas fa-arrow-left"></i>
+            </button></a>
+            <h1 class="text-xl font-bold">Medication Tracking</h1>
+            <button class="text-white" aria-label="Add new medication">
+                <i class="fas fa-plus"></i>
+            </button>
+        </header>
+
+<!-- Add Medication Modal -->
+<div id="addMedicationModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden">
+    <div class="bg-white p-6 rounded-lg shadow max-w-sm w-full">
+        <h2 class="text-lg font-semibold mb-4">Add New Medication</h2>
+        <form id="medicationForm" class="space-y-4">
+            <div>
+                <label for="medName" class="block text-sm font-medium">Medication Name</label>
+                <input id="medName" type="text" class="w-full p-2 border rounded-lg" placeholder="e.g., Aspirin" required />
+            </div>
+            <div>
+                <label for="medDosage" class="block text-sm font-medium">Dosage</label>
+                <input id="medDosage" type="text" class="w-full p-2 border rounded-lg" placeholder="e.g., 100mg, Once daily" required />
+            </div>
+            <div>
+                <label for="medTime" class="block text-sm font-medium">Next Dose Time</label>
+                <input id="medTime" type="time" class="w-full p-2 border rounded-lg" required />
+            </div>
+            <div class="flex justify-end space-x-2">
+                <button type="button" id="cancelButton" class="bg-gray-500 text-white px-4 py-2 rounded-lg">Cancel</button>
+                <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded-lg">Add</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+
+        <!-- Main Content -->
+        <main class="flex-grow p-4 space-y-6">
+            <!-- Medication List -->
+            <section class="space-y-4">
+                
+            </section>
+
+            <!-- Medication History -->
+            <section>
+                <h2 class="text-lg font-semibold mb-2">Medication History</h2>
+                <div class="bg-white rounded-lg shadow p-4 space-y-2">
+                    <div class="flex justify-between items-center">
+                        <span>Biogesic</span>
+                        <span class="text-sm text-gray-600">Today, 8:00 AM</span>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <span>Amoxicillin</span>
+                        <span class="text-sm text-gray-600">Today, 7:00 AM</span>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <span>Robitussin</span>
+                        <span class="text-sm text-gray-600">Yesterday, 8:00 PM</span>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer Navigation -->
+        <footer class="bg-white border-t border-gray-200 p-4 fixed bottom-0 left-0 w-full">
+            <nav class="flex justify-around">
+                <a href="#" class="text-gray-600"><i class="fas fa-home"></i></a>
+                <a href="#" class="text-gray-600"><i class="fas fa-pills"></i></a>
+                <a href="#" class="text-indigo-600"><i class="fas fa-chart-line"></i></a>
+                <a href="#" class="text-gray-600"><i class="fas fa-user-md"></i></a>
+            </nav>
+        </footer>
+    </div>
+    <script>
+        // Get references to important elements
+        const addButton = document.querySelector('header button[aria-label="Add new medication"]');
+        const modal = document.getElementById('addMedicationModal');
+        const cancelButton = document.getElementById('cancelButton');
+        const form = document.getElementById('medicationForm');
+        const medicationList = document.querySelector('main section:first-of-type');
+        const historyList = document.querySelector('main section:nth-of-type(2) .bg-white');
+    
+        // Open the modal
+        addButton.addEventListener('click', () => {
+            modal.classList.remove('hidden'); // Show the modal
+        });
+    
+        // Close the modal
+        cancelButton.addEventListener('click', () => {
+            modal.classList.add('hidden'); // Hide the modal
+        });
+    
+        // Handle form submission
+        form.addEventListener('submit', (e) => {
+            e.preventDefault(); // Prevent page refresh
+    
+            // Get form input values
+            const medName = document.getElementById('medName').value;
+            const medDosage = document.getElementById('medDosage').value;
+            const medTime = document.getElementById('medTime').value;
+    
+            // Create a new medication card
+            const medCard = document.createElement('div');
+            medCard.className = 'bg-white rounded-lg shadow p-4';
+            medCard.innerHTML = `
+                <h2 class="text-lg font-semibold mb-2">${medName}</h2>
+                <p class="text-sm text-gray-600">${medDosage}</p>
+                <div class="mt-2 flex justify-between items-center">
+                    <span class="text-sm text-blue-600">Next dose: ${medTime}</span>
+                    <button class="bg-green-500 text-white px-3 py-1 rounded-full text-sm take-button" aria-label="Mark as taken">
+                        Take
+                    </button>
+                </div>
+            `;
+    
+            // Append the new card to the medication list
+            medicationList.appendChild(medCard);
+    
+            // Attach the take button functionality
+            const takeButton = medCard.querySelector('.take-button');
+            attachTakeButtonLogic(takeButton, medName);
+    
+            // Reset the form and hide the modal
+            form.reset();
+            modal.classList.add('hidden');
+        });
+    
+        // Attach logic to "Take" buttons
+        function attachTakeButtonLogic(button, medName) {
+            button.addEventListener('click', () => {
+                // Log the medication in the history
+                const now = new Date();
+                const formattedTime = now.toLocaleString('en-US', {
+                    hour: 'numeric',
+                    minute: '2-digit',
+                    hour12: true,
+                });
+    
+                const logEntry = document.createElement('div');
+                logEntry.className = 'flex justify-between items-center';
+                logEntry.innerHTML = `
+                    <span>${medName}</span>
+                    <span class="text-sm text-gray-600">Today, ${formattedTime}</span>
+                `;
+    
+                // Add the log entry to the history
+                historyList.appendChild(logEntry);
+    
+                // Disable the button and indicate the dose is taken
+                button.textContent = 'Taken';
+                button.classList.remove('bg-green-500');
+                button.classList.add('bg-gray-400', 'cursor-not-allowed');
+                button.disabled = true;
+            });
+        }
+    </script>
+    
+    
+</body>
+</html>

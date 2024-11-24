@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Symptoms Tracking</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      body {
+        font-family: "Poppins", sans-serif;
+      }
+    </style>
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="bg-gray-100">
+    <div class="max-w-md mx-auto bg-white min-h-screen flex flex-col">
+      <!-- Header -->
+      <header
+        class="bg-indigo-600 text-white p-4 flex items-center justify-between"
+      >
+        <button class="text-white" aria-label="Go back">
+          <i class="fas fa-arrow-left"></i>
+        </button>
+        <h1 class="text-xl font-bold">Symptoms Tracking</h1>
+        <div></div>
+      </header>
+
+      <!-- Main Content -->
+      <main class="flex-grow p-4 space-y-6">
+        <!-- Log New Symptom -->
+        <section class="bg-white rounded-lg shadow p-4">
+          <h2 class="text-lg font-semibold mb-2">Log New Symptom</h2>
+          <form class="space-y-4">
+            <div>
+              <label
+                for="symptom"
+                class="block text-sm font-medium text-gray-700"
+                >Symptom</label
+              >
+              <input
+                type="text"
+                id="symptom"
+                name="symptom"
+                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
+              />
+            </div>
+            <div>
+              <label
+                for="severity"
+                class="block text-sm font-medium text-gray-700"
+                >Severity (1-10)</label
+              >
+              <input
+                type="number"
+                id="severity"
+                name="severity"
+                min="1"
+                max="10"
+                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
+              />
+            </div>
+            <div>
+              <label for="notes" class="block text-sm font-medium text-gray-700"
+                >Information</label
+              >
+              <textarea
+                id="notes"
+                name="notes"
+                rows="3"
+                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
+              ></textarea>
+            </div>
+            <button
+              type="submit"
+              class="w-full font-bold bg-indigo-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
+            >
+              Log Symptom
+            </button>
+          </form>
+        </section>
+
+        <!-- Symptom Timeline -->
+        <section>
+          <h2 class="text-lg font-semibold mb-2">Symptom Logs</h2>
+          <div class="bg-white rounded-lg shadow p-4 space-y-4">
+            <div class="border-l-4 border-blue-500 pl-4">
+              <div class="flex justify-between items-center">
+                <span class="font-semibold">Headache</span>
+                <span class="text-sm text-gray-600">Today, 2:30 PM</span>
+              </div>
+              <p class="text-sm text-gray-600">Severity: 6/10</p>
+              <p class="text-sm">Throbbing pain on the left side</p>
+            </div>
+            <div class="border-l-4 border-yellow-500 pl-4">
+              <div class="flex justify-between items-center">
+                <span class="font-semibold">Tummy Ache</span>
+                <span class="text-sm text-gray-600">Yesterday, 9:00 AM</span>
+              </div>
+              <p class="text-sm text-gray-600">Severity: 4/10</p>
+              <p class="text-sm">
+                After breakfast pain on burning sensation on stomach
+              </p>
+            </div>
+            <div class="border-l-4 border-green-500 pl-4">
+              <div class="flex justify-between items-center">
+                <span class="font-semibold">Vomitting</span>
+                <span class="text-sm text-gray-600">2 days ago, 7:00 PM</span>
+              </div>
+              <p class="text-sm text-gray-600">Severity: 7/10</p>
+              <p class="text-sm">Dizziness and nausea</p>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <!-- Footer Navigation -->
+      <footer
+        class="bg-white border-t border-gray-200 p-4 fixed bottom-0 left-0 w-full"
+      >
+        <nav class="flex justify-around">
+          <a href="home.html" class="text-gray-600"
+            ><i class="fas fa-home"></i
+          ></a>
+          <a href="medication-tracking.html" class="text-gray-600"
+            ><i class="fas fa-pills"></i
+          ></a>
+          <a href="symptoms.html" class="text-indigo-600"
+            ><i class="fas fa-chart-line"></i
+          ></a>
+          <a href="#" class="text-gray-600"><i class="fas fa-user-md"></i></a>
+        </nav>
+      </footer>
+    </div>
+    <script>
+      // Get references to important elements
+      const form = document.querySelector("form");
+      const symptomTimeline = document.querySelector(
+        "section:nth-of-type(2) .bg-white"
+      );
+
+      // Handle form submission
+      form.addEventListener("submit", (e) => {
+        e.preventDefault(); // Prevent the form from refreshing the page
+
+        // Get form input values
+        const symptomName = document.getElementById("symptom").value;
+        const severity = document.getElementById("severity").value;
+        const notes = document.getElementById("notes").value;
+
+        // Get the current date and time
+        const now = new Date();
+        const formattedDate = now.toLocaleString("en-US", {
+          weekday: "short",
+          hour: "numeric",
+          minute: "2-digit",
+          hour12: true,
+        });
+
+        // Assign a color based on severity
+        let severityColor;
+        if (severity <= 3) {
+          severityColor = "border-green-500";
+        } else if (severity <= 6) {
+          severityColor = "border-yellow-500";
+        } else {
+          severityColor = "border-red-500";
+        }
+
+        // Create a new symptom log element
+        const logEntry = document.createElement("div");
+        logEntry.className = `border-l-4 ${severityColor} pl-4 flex justify-between items-start`;
+
+        logEntry.innerHTML = `
+                <div>
+                    <div class="flex justify-between items-center gap-5">
+                        <span class="font-semibold">${symptomName}</span>
+                        <span class="text-sm text-gray-600 text-end">${formattedDate}</span>
+                    </div>
+                    <p class="text-sm text-gray-600">Severity: ${severity}/10</p>
+                    <p class="text-sm">${notes}</p>
+                    <button class="text-red-500 flex hover:text-red-700 delete-btn" aria-label="Delete symptom">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                </div>
+            `;
+
+        // Add the log entry to the symptom timeline
+        symptomTimeline.prepend(logEntry);
+
+        // Attach delete functionality to the delete button
+        const deleteButton = logEntry.querySelector(".delete-btn");
+        deleteButton.addEventListener("click", () => {
+          logEntry.remove();
+        });
+
+        // Reset the form
+        form.reset();
+      });
+    </script>
+  </body>
+</html>

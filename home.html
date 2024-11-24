@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Psyche</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      body {
+        font-family: "Poppins", sans-serif;
+      }
+    </style>
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="bg-gray-100">
+    <div class="max-w-md mx-auto bg-white min-h-screen flex flex-col">
+      <!-- Header -->
+      <header
+        class="bg-indigo-600 text-white p-4 flex items-center justify-between"
+      >
+        <h1 class="text-xl font-bold">Psyche</h1>
+      </header>
+
+      <!-- Main Content -->
+      <main class="flex-col p-4 space-y-6">
+        <!-- QR Code Generation -->
+        <section class="bg-white rounded-lg shadow p-4">
+          <h2 class="text-lg font-semibold mb-2">Your QR Code</h2>
+          <div class="flex justify-center">
+            <div class="w-32 h-32 bg-gray-300 flex items-center justify-center">
+              <i class="fas fa-qrcode text-4xl"></i>
+            </div>
+          </div>
+        </section>
+
+        <!-- Call for Hospital Attention -->
+
+        <section class="flex justify-center">
+          <button
+            class="bg-red-500 rounded-lg shadow p-5 w-60 text-white hover:bg-red-200"
+          >
+            <h2 class="text-lg font-semibold mb-2 text-start">
+              Emergency Call
+            </h2>
+            <div class="flex justify-between items-center">
+              <span>Call Hospital</span>
+              <i class="fas fa-phone-alt"></i>
+            </div>
+          </button>
+        </section>
+
+        <!-- Medication Tracking -->
+        <section class="bg-white rounded-lg shadow p-4">
+          <h2 class="text-lg font-semibold mb-2">Medication Tracking</h2>
+          <div class="flex justify-between items-center">
+            <span>Log & set reminders</span>
+            <i class="fas fa-pills text-blue-600"></i>
+          </div>
+        </section>
+
+        <!-- Symptoms Tracking -->
+        <section class="bg-white rounded-lg shadow p-4">
+          <h2 class="text-lg font-semibold mb-2">Symptoms Tracking</h2>
+          <div class="flex justify-between items-center">
+            <span>Log & view timeline</span>
+            <i class="fas fa-chart-line text-blue-600"></i>
+          </div>
+        </section>
+      </main>
+
+      <!-- Footer Navigation -->
+      <footer
+        class="bg-white border-t border-gray-200 p-4 fixed bottom-0 left-0 w-full"
+      >
+        <nav class="flex justify-around">
+          <a href="home.html" class="text-indigo-600"><i class="fas fa-home"></i></a>
+          <a href="medication-tracking.html" class="text-gray-600"><i class="fas fa-pills"></i></a>
+          <a href="symptoms.html" class="text-gray-600"
+            ><i class="fas fa-chart-line"></i
+          ></a>
+          <a href="profile.html" class="text-gray-600"><i class="fas fa-user-md"></i></a>
+        </nav>
+      </footer>
+    </div>
+  </body>
+</html>
