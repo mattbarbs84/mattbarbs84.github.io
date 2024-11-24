@@ -27,13 +27,12 @@
       >
         <h1 class="text-xl font-bold">Psyche</h1>
         <button
-        onclick="handleLogout()" 
-        class="bg-indigo-900 hover:bg-red-700 text-white text-xs px-2 py-2 rounded-lg"
-      >
-        Log Out
-        <i class="fas fa-sign-out-alt"></i>
-      </button>
-      
+          onclick="handleLogout()"
+          class="bg-indigo-900 hover:bg-red-700 text-white text-xs px-2 py-2 rounded-lg"
+        >
+          Log Out
+          <i class="fas fa-sign-out-alt"></i>
+        </button>
       </header>
 
       <!-- Main Content -->
@@ -43,7 +42,11 @@
           <h2 class="text-lg font-semibold mb-2">Your QR Code</h2>
           <div class="flex justify-center">
             <div class="w-32 h-32 bg-gray-300 flex items-center justify-center">
-              <img src="/assets/qr.JPG" alt="QR Code" class="w-full h-full object-cover">
+              <img
+                src="/assets/qr.JPG"
+                alt="QR Code"
+                class="w-full h-full object-cover"
+              />
             </div>
           </div>
         </section>
@@ -69,28 +72,28 @@
           <div class="flex justify-center items-center">
             <a
               href="medication-tracking.html"
-              class="text-white  flex items-center space-x-2 mt-5"
+              class="text-white flex items-center space-x-2 mt-5"
             >
-            <button class="bg-indigo-600 hover:bg-gray-300 p-2 rounded-lg"
-            ><i class="fas fa-pills"></i>
-              <span>Medication Tracker</span></button>
-              
+              <button class="bg-indigo-600 hover:bg-gray-300 p-2 rounded-lg">
+                <i class="fas fa-pills"></i> <span>Medication Tracker</span>
+              </button>
             </a>
           </div>
         </section>
 
         <!-- Symptoms Tracking -->
-        <section class="bg-white rounded-lg shadow p-4">
+        <section class="bg-white rounded-lg shadow p-4 pb-5">
           <h2 class="text-lg font-semibold mb-2">Track your Symptoms</h2>
           <div class="flex justify-center items-center">
             <a
               href="symptoms.html"
-              class="text-white  flex items-center space-x-2 mt-5"
+              class="text-white flex items-center space-x-2 mt-5"
             >
-            <button class="bg-indigo-600 hover:bg-gray-300 p-2 rounded-lg w-full"
-            ><i class="fas fa-chart-line"></i>
-              <span>Symptoms Tracker</span></button>
-              
+              <button
+                class="bg-indigo-600 hover:bg-gray-300 p-2 rounded-lg w-full"
+              >
+                <i class="fas fa-chart-line"></i> <span>Symptoms Tracker</span>
+              </button>
             </a>
           </div>
         </section>
@@ -101,23 +104,28 @@
         class="bg-white border-t border-gray-200 p-4 fixed bottom-0 left-0 w-full"
       >
         <nav class="flex justify-around">
-          <a href="home.html" class="text-indigo-600"><i class="fas fa-home"></i></a>
-          <a href="medication-tracking.html" class="text-gray-600"><i class="fas fa-pills"></i></a>
+          <a href="home.html" class="text-indigo-600"
+            ><i class="fas fa-home"></i
+          ></a>
+          <a href="medication-tracking.html" class="text-gray-600"
+            ><i class="fas fa-pills"></i
+          ></a>
           <a href="symptoms.html" class="text-gray-600"
             ><i class="fas fa-chart-line"></i
           ></a>
-          <a href="profile.html" class="text-gray-600"><i class="fas fa-user-md"></i></a>
+          <a href="profile.html" class="text-gray-600"
+            ><i class="fas fa-user-md"></i
+          ></a>
         </nav>
       </footer>
     </div>
     <script>
       function handleLogout() {
-    const confirmed = confirm("Are you sure you want to log out?");
-    if (confirmed) {
-      window.location.href = "login.html";
-    }
-  }
+        const confirmed = confirm("Are you sure you want to log out?");
+        if (confirmed) {
+          window.location.href = "login.html";
+        }
+      }
     </script>
-    
   </body>
 </html>
